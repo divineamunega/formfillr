@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>FormFillr Dynamic Persona Entry</title>
+		<link rel="stylesheet" href="options.css" />
+
+		<!-- Load Lucide Icons for better UI on dynamic elements -->
+		<!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+	</head>
+	<body>
+		<div class="page">
+			<!-- Header Section -->
+			<header class="header">
+				<div class="logo">
+					<!-- Simple SVG Logo -->
+					<svg
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+					>
+						<rect
+							x="3"
+							y="3"
+							width="18"
+							height="18"
+							rx="4"
+							fill="white"
+							opacity="0.05"
+						/>
+						<path
+							d="M7 12h10M7 8h10M7 16h6"
+							stroke="white"
+							stroke-width="1.6"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							opacity="0.9"
+						/>
+					</svg>
+				</div>
+				<div class="title">
+					<h1>FormFillr Persona Entry</h1>
+					<p class="subtitle">
+						Enter your core identity profile for easy form completion.
+					</p>
+				</div>
+			</header>
+
+			<main class="main">
+				<!-- 1. Primary Details (Basic Info) -->
+				<section class="card">
+					<h2 class="section-title">Primary Details</h2>
+
+					<div class="grid-2">
+						<!-- Full Name -->
+						<div class="form-group">
+							<label for="name">Full Name</label>
+							<input
+								type="text"
+								id="name"
+								value="Jane K. Doe"
+								placeholder="e.g. John Doe"
+							/>
+						</div>
+
+						<!-- Email -->
+						<div class="form-group">
+							<label for="email">Email Address</label>
+							<input
+								type="email"
+								id="email"
+								value="jane.doe@aperture.com"
+								placeholder="e.g. samuel@example.com"
+							/>
+						</div>
+
+						<!-- Date of Birth -->
+						<div class="form-group">
+							<label for="dob">Date of Birth</label>
+							<input type="date" id="dob" value="1987-03-24" />
+						</div>
+
+						<!-- Gender -->
+						<div class="form-group">
+							<label for="gender">Gender</label>
+							<select id="gender">
+								<option value="prefer_not_say">Prefer not to say</option>
+								<option value="male">Male</option>
+								<option value="female" selected>Female</option>
+								<option value="nonbinary">Non-binary</option>
+							</select>
+						</div>
+
+						<!-- Role / Occupation -->
+						<div class="form-group">
+							<label for="role">Role / Occupation</label>
+							<input
+								type="text"
+								id="role"
+								value="Lead Portal Tester"
+								placeholder="e.g. Software Engineer"
+							/>
+						</div>
+
+						<!-- Company / Organization -->
+						<div class="form-group">
+							<label for="company">Company / Organization</label>
+							<input
+								type="text"
+								id="company"
+								value="Aperture Science, LLC"
+								placeholder="e.g. Idealabs"
+							/>
+						</div>
+
+						<!-- Mailing Address -->
+						<div class="form-group">
+							<label for="address">Mailing Address</label>
+							<input
+								type="text"
+								id="address"
+								value="123 Science Way, MI 49999"
+								placeholder="Street, City, State, Zip"
+							/>
+						</div>
+
+						<!-- Phone Number -->
+						<div class="form-group">
+							<label for="phone">Phone Number</label>
+							<input
+								type="tel"
+								id="phone"
+								value="+1 (555) 555-1234"
+								placeholder="e.g. +1 (555) 123-4567"
+							/>
+						</div>
+					</div>
+				</section>
+
+				<!-- 2. Personal Context & Bio -->
+				<section class="card">
+					<h2 class="section-title">Personal Context & Bio</h2>
+					<!-- UPDATED LABEL WITH BUTTON -->
+					<div class="form-group">
+						<label for="bio" class="flex items-center justify-between">
+							<span
+								>Short Bio / Context (For vague fields like "Tell us
+								more...")</span
+							>
+							<button
+								id="openInstructionsBtn"
+								class="btn secondary"
+								type="button"
+								style="padding: 4px 8px; font-size: 11px; margin-right: 0"
+							>
+								How do I fill this?
+							</button>
+						</label>
+						<textarea
+							id="bio"
+							rows="10"
+							placeholder="Paste your detailed personal Q&A transcript here."
+						></textarea>
+					</div>
+				</section>
+
+				<!-- 3. Dynamic Custom Field Input -->
+				<section class="card">
+					<h2 class="section-title">Custom Fields</h2>
+					<p class="subtitle" style="margin-bottom: 12px">
+						Add any extra details (Label and Value) you frequently need to fill
+						out on forms.
+					</p>
+
+					<!-- Input fields for adding a NEW custom field -->
+					<div class="flex items-end gap-2" style="margin-bottom: 18px">
+						<div class="form-group" style="margin-bottom: 0; flex-grow: 1.5">
+							<label for="new-custom-label">Field Label</label>
+							<input
+								type="text"
+								id="new-custom-label"
+								placeholder="e.g., Favorite Color"
+							/>
+						</div>
+
+						<!-- Data Type Selector -->
+						<div class="form-group" style="margin-bottom: 0; flex-grow: 0.5">
+							<label for="new-custom-type">Data Type</label>
+							<select id="new-custom-type">
+								<option value="text">Text</option>
+								<option value="number">Number</option>
+								<option value="date">Date</option>
+							</select>
+						</div>
+
+						<div class="form-group" style="margin-bottom: 0; flex-grow: 2">
+							<label for="new-custom-value">Field Value</label>
+							<input
+								type="text"
+								id="new-custom-value"
+								placeholder="e.g., Azure"
+							/>
+						</div>
+
+						<button
+							id="add-custom-field-btn"
+							class="btn primary"
+							title="Add Custom Field"
+						>
+							&plus;
+						</button>
+					</div>
+
+					<!-- Container for existing custom fields -->
+					<div id="custom-fields-container">
+						<!-- Custom fields will be rendered here by JavaScript -->
+					</div>
+				</section>
+			</main>
+
+			<!-- Action Bar -->
+			<div class="actions">
+				<button class="btn secondary" type="button" onclick="clearAll()">
+					Clear All
+				</button>
+				<button class="btn secondary" type="button" onclick="loadProfile()">
+					Load Profile
+				</button>
+				<button class="btn primary" type="button" onclick="savePersona()">
+					Save Persona
+				</button>
+			</div>
+
+			<!-- Minimal Footer -->
+			<footer class="footer">
+				<p>FormFillr &copy; 2025</p>
+			</footer>
+		</div>
+
+		<!-- Modal Dialog for Save Confirmation / Instructions (Uses same style) -->
+		<div id="save-modal" class="modal-backdrop">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Persona Saved (Placeholder)</h3>
+					<button class="modal-close-btn" onclick="closeModal('save-modal')">
+						&times;
+					</button>
+				</div>
+				<div class="modal-body">
+					<p style="color: var(--accent); font-weight: 600">
+						For the best results, follow the instructions!
+					</p>
+					<p>
+						Ensure you have copied the **AI Interview Prompt** from the
+						instruction modal into an LLM and pasted your detailed answers back
+						in.
+					</p>
+					<p>
+						This comprehensive Q&A format will maximize your profile's
+						effectiveness for filling out complex, vague, or subjective form
+						fields.
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button class="btn primary" onclick="closeModal('save-modal')">
+						Got it!
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Instruction Modal (New) -->
+		<div id="instruction-modal" class="modal-backdrop">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">How to Create a Detailed Personal Bio</h3>
+					<button class="modal-close-btn" id="instructionModalCloseBtn">
+						&times;
+					</button>
+				</div>
+				<div class="modal-body">
+					<p><strong>Guidance: What to Write Here</strong></p>
+					<p>
+						This space is for creating a rich, versatile narrative about
+						yourself that goes beyond simple facts. A detailed entry helps
+						FormFillr generate complex, subjective answers for forms asking
+						questions like "Describe your goals," or "Tell us about a time you
+						demonstrated leadership.
+					</p>
+
+					<p>Your Bio should include:</p>
+					<ul>
+						<li>
+							<strong>Professional Summary:</strong> A few sentences describing
+							your current role, key skills, and major responsibilities.
+						</li>
+						<li>
+							<strong>Personal Interests:</strong> Hobbies, non-work passions,
+							and areas of intellectual curiosity (e.g., "I enjoy hiking,
+							learning about local history, and building small electronics
+							projects").
+						</li>
+						<li>
+							<strong>Values/Philosophy:</strong> Anything about your work
+							ethic, approach to challenges, or personal philosophy.
+						</li>
+					</ul>
+
+					<!-- <p>---</p> -->
+
+					<p style="color: var(--accent); font-weight: 600">
+						FOR BEST RESULTS, FOLLOW THE DETAILED AI INTERVIEW INSTRUCTIONS
+						BELOW:
+					</p>
+
+					<p>
+						<strong>INSTRUCTIONS:</strong> Copy the
+						<strong>PROMPT TO USE WITH AI</strong>
+						below and paste it into a large language model (like Gemini,
+						ChatGPT, or Claude). Respond to the AI's 10 questions, then copy the
+						entire Q&A transcript and paste it back into the bio text area.
+					</p>
+
+					<p><strong>PROMPT TO USE WITH AI:</strong></p>
+					<code
+						>Act as a professional interviewer for a job application or
+						university admission. Ask me 10 specific, open-ended questions
+						designed to uncover my professional experience, personal interests,
+						biggest achievements, and how I handle challenges. I will provide a
+						short answer after each question. Structure your response as 'Q:
+						[Question]\nA: [Your Answer]'. Once complete, copy the entire Q&A
+						transcript back into this textarea and save.</code
+					>
+				</div>
+				<div class="modal-footer">
+					<button class="btn primary" id="close-instructions">
+						Close Instructions
+					</button>
+				</div>
+			</div>
+		</div>
+		<script type="module" src="./options.js"></script>
+	</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>FormFillr — Detected Fields</title>
+		<link rel="stylesheet" href="popup.css" />
+	</head>
+	<body>
+		<div class="container" role="dialog" aria-label="Form detected fields">
+			<div class="header">
+				<div class="logo" aria-hidden="true">
+					<!-- simple icon -->
+					<svg
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<rect
+							x="3"
+							y="3"
+							width="18"
+							height="18"
+							rx="4"
+							fill="white"
+							opacity="0.06"
+						/>
+						<path
+							d="M7 12h10M7 8h10M7 16h6"
+							stroke="white"
+							stroke-width="1.6"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							opacity="0.95"
+						/>
+					</svg>
+				</div>
+
+				<div class="title">
+					<div class="main">FormFillr</div>
+					<div class="sub">
+						Detected fields on this page — review suggestions
+					</div>
+				</div>
+			</div>
+
+			<div class="summary" role="status" aria-live="polite">
+				<div class="pill">3 fields detected</div>
+				<div class="actions">
+					<a class="btn secondary" href="#" role="button" aria-disabled="true">
+						<!-- refresh icon -->
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							style="opacity: 0.9"
+						>
+							<path
+								d="M20 12a8 8 0 10-2.5 5.5L20 20"
+								stroke="white"
+								stroke-width="1.4"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M20 4v6h-6"
+								stroke="white"
+								stroke-width="1.4"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+						Scan
+					</a>
+					<a class="btn" href="#" role="button">Fill selected</a>
+				</div>
+			</div>
+
+			<div class="table-wrap" role="region" aria-label="Detected form fields">
+				<!-- table header -->
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 38%">Field</th>
+							<th style="width: 34%">Suggested value</th>
+							<th style="width: 14%">Confidence</th>
+							<th style="width: 14%; text-align: right">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Example row 1 -->
+						<tr>
+							<td>
+								<div class="col-label">
+									<span class="field-name">Full name</span>
+									<span class="field-meta">Label: "Your full name"</span>
+								</div>
+							</td>
+							<td>
+								<span class="value-bubble" title="Samuel Divineamunega"
+									>Samuel Divineamunega</span
+								>
+							</td>
+							<td>
+								<div class="confidence" aria-hidden="true">
+									<div style="font-weight: 600; color: var(--muted)">82%</div>
+									<div class="conf-bar" aria-hidden="true">
+										<div class="conf-fill" style="width: 82%"></div>
+									</div>
+								</div>
+							</td>
+							<td class="actions-cell" role="gridcell">
+								<label class="checkbox" aria-label="Select to fill">
+									<!-- placeholder checkmark -->
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+										<path
+											d="M20 6L9 17l-5-5"
+											stroke="white"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</label>
+							</td>
+						</tr>
+
+						<!-- Example row 2 -->
+						<tr>
+							<td>
+								<div class="col-label">
+									<span class="field-name">Email</span>
+									<span class="field-meta"
+										>Placeholder: "email@example.com"</span
+									>
+								</div>
+							</td>
+							<td>
+								<span class="value-bubble" title="samuel@example.com"
+									>samuel@example.com</span
+								>
+							</td>
+							<td>
+								<div class="confidence" aria-hidden="true">
+									<div style="font-weight: 600; color: var(--muted)">96%</div>
+									<div class="conf-bar" aria-hidden="true">
+										<div class="conf-fill" style="width: 96%"></div>
+									</div>
+								</div>
+							</td>
+							<td class="actions-cell">
+								<label class="checkbox" aria-label="Select to fill">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+										<path
+											d="M20 6L9 17l-5-5"
+											stroke="white"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</label>
+							</td>
+						</tr>
+
+						<!-- Example row 3 -->
+						<tr>
+							<td>
+								<div class="col-label">
+									<span class="field-name">Company</span>
+									<span class="field-meta"
+										>Question: "Company / Organization"</span
+									>
+								</div>
+							</td>
+							<td>
+								<span class="value-bubble" title="Idealabs">Idealabs</span>
+							</td>
+							<td>
+								<div class="confidence" aria-hidden="true">
+									<div style="font-weight: 600; color: var(--muted)">68%</div>
+									<div class="conf-bar" aria-hidden="true">
+										<div class="conf-fill" style="width: 68%"></div>
+									</div>
+								</div>
+							</td>
+							<td class="actions-cell">
+								<label class="checkbox" aria-label="Select to fill">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+										<path
+											d="M20 6L9 17l-5-5"
+											stroke="white"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</label>
+							</td>
+						</tr>
+
+						<!-- Empty / placeholder guidance row (comment out when real rows exist) -->
+						<!--
+          <tr>
+            <td colspan="4">
+              <div class="empty-state">
+                No fields detected on this page yet.<br />
+                Click <strong>Scan</strong> to search for short answers and text inputs.
+              </div>
+            </td>
+          </tr>
+          --></tbody>
+				</table>
+			</div>
+
+			<div class="footer">
+				<div class="hint">
+					Detected on: <strong>docs.google.com/forms/</strong>
+				</div>
+				<div style="display: flex; gap: 8px">
+					<button class="small-btn" type="button">Clear selection</button>
+					<button class="small-btn" type="button">Wipe persona</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="./popup.js"></script>
+	</body>
+</html>

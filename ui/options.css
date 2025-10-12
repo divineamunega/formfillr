@@ -1,0 +1,350 @@
+:root {
+	--bg: #0f1724;
+	--card: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.02),
+		rgba(255, 255, 255, 0.01)
+	);
+	--muted: #9aa4b2;
+	--accent: #7c5cff;
+	--text: #e6eef8;
+	--radius: 12px;
+	font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+		Roboto;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+	background: var(--bg);
+	color: var(--text);
+	font-size: 14px;
+}
+
+button {
+	user-select: none;
+}
+
+.page {
+	max-width: 680px;
+	margin: 0 auto;
+	padding: 24px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 24px;
+}
+
+.logo {
+	width: 48px;
+	height: 48px;
+	border-radius: 10px;
+	display: grid;
+	place-items: center;
+	background: linear-gradient(135deg, var(--accent), #5b8bff);
+	box-shadow: 0 6px 18px rgba(124, 92, 255, 0.18);
+}
+/* Styling for the logo SVG to ensure it's visible */
+.logo svg path,
+.logo svg rect {
+	fill: white;
+	stroke: white;
+	opacity: 0.9;
+}
+
+.title h1 {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.subtitle {
+	color: var(--muted);
+	font-size: 13px;
+	margin-top: 4px;
+}
+
+.card {
+	background: var(--card);
+	border-radius: var(--radius);
+	padding: 18px 20px;
+	border: 1px solid rgba(255, 255, 255, 0.04);
+	margin-bottom: 20px;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.section-title {
+	font-size: 15px;
+	font-weight: 600;
+	margin-bottom: 14px;
+	opacity: 0.9;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 14px;
+}
+
+label {
+	margin-bottom: 6px;
+	font-weight: 500;
+	font-size: 13px;
+}
+
+input,
+textarea,
+select {
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	color: var(--text);
+	border-radius: 8px;
+	padding: 8px 10px;
+	font-size: 13px;
+	outline: none;
+	transition: border-color 0.15s ease, background 0.15s ease;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--accent);
+	background: rgba(255, 255, 255, 0.06);
+}
+
+/* Specific style for Date input (to ensure text color is right) */
+input[type="date"] {
+	color-scheme: dark; /* Helps native date picker look good in dark mode */
+}
+
+textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	padding: 20px 0;
+}
+
+.btn {
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-weight: 600;
+	cursor: pointer;
+	font-size: 13px;
+	transition: all 0.2s ease;
+}
+
+.btn.primary {
+	background: linear-gradient(180deg, var(--accent), #5b8bff);
+	color: white;
+	box-shadow: 0 6px 18px rgba(124, 92, 255, 0.18);
+	margin-left: auto;
+}
+
+.btn.primary:hover {
+	opacity: 0.9;
+	transform: translateY(-1px);
+}
+
+.btn.secondary {
+	background: transparent;
+	color: var(--muted);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn.secondary:hover {
+	color: var(--text);
+	border-color: rgba(255, 255, 255, 0.15);
+}
+
+.footer {
+	text-align: center;
+	color: var(--muted);
+	font-size: 12px;
+	margin-top: 24px;
+}
+
+/* Utility Classes */
+.flex {
+	display: flex;
+}
+.items-center {
+	align-items: center;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.space-x-3 > * + * {
+	margin-left: 0.75rem;
+}
+.gap-2 {
+	gap: 8px;
+}
+.p-2 {
+	padding: 8px;
+}
+.rounded-md {
+	border-radius: 6px;
+}
+
+/* Grid layout for two-column sections */
+.grid-2 {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 640px) {
+	.grid-2 {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+/* Custom Field Item Styling */
+.custom-field-item {
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	padding: 8px 12px;
+	border-radius: 8px;
+	margin-bottom: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 13px;
+}
+.custom-field-item strong {
+	color: var(--accent);
+	margin-right: 8px;
+}
+.delete-btn {
+	background: none;
+	border: none;
+	color: var(--muted);
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	transition: color 0.15s ease;
+}
+.delete-btn:hover {
+	color: #ff5c5c;
+}
+
+#add-custom-field-btn {
+	font-size: 20px;
+	font-weight: 900;
+	/* padding: 5px 10px; */
+}
+
+/* Modal Styling */
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: none; /* Hidden by default */
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	backdrop-filter: blur(5px);
+}
+
+.modal-content {
+	background-color: var(--bg);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: var(--radius);
+	width: 90%;
+	height: 90%;
+	overflow-y: auto;
+	max-width: 600px; /* Slightly wider for better instruction readability */
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+	padding: 20px;
+
+	&::-webkit-scrollbar {
+		width: 8px;
+		background-color: var(--bg);
+		filter: brightness(0.5);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--accent);
+		border-radius: 20px;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		opacity: 0.5;
+	}
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.modal-title {
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0;
+}
+
+.modal-close-btn {
+	background: none;
+	border: none;
+	font-size: 30px;
+	color: var(--muted);
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	transition: color 0.15s ease;
+}
+.modal-close-btn:hover {
+	color: var(--text);
+}
+
+.modal-body p {
+	margin: 0 0 10px 0;
+	color: var(--muted);
+	line-height: 1.5;
+	/* white-space: pre-wrap; */
+}
+.modal-body strong {
+	color: var(--text);
+}
+.modal-body ul {
+	padding-left: 20px;
+	margin-bottom: 15px;
+	color: var(--muted);
+}
+.modal-body li {
+	margin-bottom: 20px;
+}
+.modal-body code {
+	display: block;
+	background: rgba(255, 255, 255, 0.05);
+	padding: 10px;
+	border-radius: 8px;
+	font-family: monospace;
+	color: var(--accent);
+	line-height: 25px;
+	/* white-space: pre-wrap; */
+	font-size: 13px;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
