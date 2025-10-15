@@ -46,9 +46,9 @@
 			</div>
 
 			<div class="summary" role="status" aria-live="polite">
-				<div class="pill">3 fields detected</div>
+				<div id="field-count" class="pill">3 fields detected</div>
 				<div class="actions">
-					<a class="btn secondary" href="#" role="button" aria-disabled="true">
+					<a id="scan-button" class="btn secondary" href="#" role="button" aria-disabled="true">
 						<!-- refresh icon -->
 						<svg
 							width="14"
@@ -74,7 +74,7 @@
 						</svg>
 						Scan
 					</a>
-					<a class="btn" href="#" role="button">Fill selected</a>
+					<a id="get-ai-suggestions-button" class="btn" href="#" role="button">Get AI Suggestions</a>
 				</div>
 			</div>
 
@@ -84,134 +84,12 @@
 					<thead>
 						<tr>
 							<th style="width: 38%">Field</th>
-							<th style="width: 34%">Suggested value</th>
-							<th style="width: 14%">Confidence</th>
-							<th style="width: 14%; text-align: right">Actions</th>
-						</tr>
+							            <th class="initially-hidden" style="width: 34%">Suggested value</th>
+							            <th class="initially-hidden" style="width: 14%">Confidence</th>
+							            <th class="initially-hidden" style="width: 14%; text-align: right">Actions</th>						</tr>
 					</thead>
 					<tbody>
-						<!-- Example row 1 -->
-						<tr>
-							<td>
-								<div class="col-label">
-									<span class="field-name">Full name</span>
-									<span class="field-meta">Label: "Your full name"</span>
-								</div>
-							</td>
-							<td>
-								<span class="value-bubble" title="Samuel Divineamunega"
-									>Samuel Divineamunega</span
-								>
-							</td>
-							<td>
-								<div class="confidence" aria-hidden="true">
-									<div style="font-weight: 600; color: var(--muted)">82%</div>
-									<div class="conf-bar" aria-hidden="true">
-										<div class="conf-fill" style="width: 82%"></div>
-									</div>
-								</div>
-							</td>
-							<td class="actions-cell" role="gridcell">
-								<label class="checkbox" aria-label="Select to fill">
-									<!-- placeholder checkmark -->
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-										<path
-											d="M20 6L9 17l-5-5"
-											stroke="white"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-								</label>
-							</td>
-						</tr>
-
-						<!-- Example row 2 -->
-						<tr>
-							<td>
-								<div class="col-label">
-									<span class="field-name">Email</span>
-									<span class="field-meta"
-										>Placeholder: "email@example.com"</span
-									>
-								</div>
-							</td>
-							<td>
-								<span class="value-bubble" title="samuel@example.com"
-									>samuel@example.com</span
-								>
-							</td>
-							<td>
-								<div class="confidence" aria-hidden="true">
-									<div style="font-weight: 600; color: var(--muted)">96%</div>
-									<div class="conf-bar" aria-hidden="true">
-										<div class="conf-fill" style="width: 96%"></div>
-									</div>
-								</div>
-							</td>
-							<td class="actions-cell">
-								<label class="checkbox" aria-label="Select to fill">
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-										<path
-											d="M20 6L9 17l-5-5"
-											stroke="white"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-								</label>
-							</td>
-						</tr>
-
-						<!-- Example row 3 -->
-						<tr>
-							<td>
-								<div class="col-label">
-									<span class="field-name">Company</span>
-									<span class="field-meta"
-										>Question: "Company / Organization"</span
-									>
-								</div>
-							</td>
-							<td>
-								<span class="value-bubble" title="Idealabs">Idealabs</span>
-							</td>
-							<td>
-								<div class="confidence" aria-hidden="true">
-									<div style="font-weight: 600; color: var(--muted)">68%</div>
-									<div class="conf-bar" aria-hidden="true">
-										<div class="conf-fill" style="width: 68%"></div>
-									</div>
-								</div>
-							</td>
-							<td class="actions-cell">
-								<label class="checkbox" aria-label="Select to fill">
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-										<path
-											d="M20 6L9 17l-5-5"
-											stroke="white"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-								</label>
-							</td>
-						</tr>
-
-						<!-- Empty / placeholder guidance row (comment out when real rows exist) -->
-						<!--
-          <tr>
-            <td colspan="4">
-              <div class="empty-state">
-                No fields detected on this page yet.<br />
-                Click <strong>Scan</strong> to search for short answers and text inputs.
-              </div>
-            </td>
-          </tr>
-          --></tbody>
+						<!-- Fields will be dynamically inserted here --></tbody>
 				</table>
 			</div>
 

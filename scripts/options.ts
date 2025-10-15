@@ -1,17 +1,29 @@
-// Array to store custom fields data (Updated structure to include 'type')
+/** ------------------------------------------------------------------------
+ * Persona Options Page
+ * - Handles custom fields, persona data input, and modal interactions
+ * - Clean frontend-only logic (no storage or encryption)
+ * ------------------------------------------------------------------------ */
+
+/* ----------------------------- DOM Utilities ----------------------------- */
 const $ = (id: string) => document.getElementById(id)!;
 
+/* ----------------------------- DOM References ---------------------------- */
 const newLabelInput = $("new-custom-label") as HTMLInputElement;
-const customFieldsContainer = $("custom-fields-container");
 const newValueInput = $("new-custom-value") as HTMLInputElement;
-const newTypeSelect = $("new-custom-type") as HTMLInputElement;
+const newTypeSelect = $("new-custom-type") as HTMLSelectElement;
 const addFieldButton = $("add-custom-field-btn");
-const closeModalBtn = $("close-modal");
 
-// Modal references
+const customFieldsContainer = $("custom-fields-container");
+
 const saveModal = $("save-modal");
 const instructionModal = $("instruction-modal");
+const closeModalBtn = $("close-modal");
 
+const openInstructionsBtn = $("openInstructionsBtn");
+
+const savePersonaBtn = $("save-persona");
+
+/* ----------------------------- Default Values ---------------------------- */
 let customFields = [
 	{ label: "Project ID", value: "GLaDOS-1975", type: "text" },
 	{ label: "Preferred Initials", value: "JKD", type: "text" },
@@ -19,41 +31,45 @@ let customFields = [
 	{ label: "Employee ID", value: "87532", type: "number" },
 ];
 
-// Define the simplified default text for the textarea
-const defaultBioText = `Paste your detailed personal Q&A transcript here. Click the "How do I fill this?" button above for detailed instructions on using the AI interview prompt.`;
+const defaultBioText = `
+Paste your detailed personal Q&A transcript here.
+Click the "How do I fill this?" button above for detailed instructions
+on using the AI interview prompt.
+`.trim();
 
-/**
- * Renders all custom fields from the customFields array into the UI.
- */
+/* ----------------------------- Render Helpers ---------------------------- */
+
+/** Render all custom fields into the UI. */
 function renderCustomFields() {
 	customFieldsContainer.innerHTML = "";
 
 	if (customFields.length === 0) {
-		customFieldsContainer.innerHTML = `<p class="subtitle">No custom fields added yet. Use the form above to add one.</p>`;
+		customFieldsContainer.innerHTML = `
+			<p class="subtitle">
+				No custom fields added yet. Use the form above to add one.
+			</p>
+		`;
 		return;
 	}
 
 	customFields.forEach((field, index) => {
 		const item = document.createElement("div");
 		item.className = "custom-field-item";
-		// Updated innerHTML to include the data type
 		item.innerHTML = `
-                    <div>
-                        <strong>${field.label}</strong> 
-                        <span style="color: var(--muted); font-size: 11px; text-transform: capitalize;">(${field.type})</span>: 
-                        <span>${field.value}</span>
-                    </div>
-                    <button class="delete-btn" data-index="${index}" onclick="deleteCustomField(${index})" title="Remove Field">
-                        <i data-lucide="x" class="h-4 w-4"></i>
-                    </button>
-                `;
+			<div>
+				<strong>${field.label}</strong>
+				<span class="field-type">(${field.type})</span>:
+				<span>${field.value}</span>
+			</div>
+			<button class="delete-btn" data-index="${index}" title="Remove Field">&times;</button>
+		`;
 		customFieldsContainer.appendChild(item);
 	});
 }
 
-/**
- * Adds a new custom field from the input values.
- */
+/* ----------------------------- CRUD Operations --------------------------- */
+
+/** Add a new custom field from input values. */
 function addCustomField() {
 	const label = newLabelInput.value.trim();
 	const value = newValueInput.value.trim();
@@ -64,10 +80,9 @@ function addCustomField() {
 		return;
 	}
 
-	// Push all three properties (label, value, type)
 	customFields.push({ label, value, type });
 
-	// Clear inputs and reset type selection
+	// Reset inputs
 	newLabelInput.value = "";
 	newValueInput.value = "";
 	newTypeSelect.value = "text";
@@ -75,41 +90,30 @@ function addCustomField() {
 	renderCustomFields();
 }
 
-/**
- * Deletes a custom field by index.
- * @param {number} index - The index of the field to delete.
- */
+/** Delete a custom field by index. */
 function deleteCustomField(index: number) {
 	customFields.splice(index, 1);
 	renderCustomFields();
 }
 
-/**
- * Opens a specified modal.
- * @param {string} id - The ID of the modal to open ('save-modal' or 'instruction-modal').
- */
+/* ----------------------------- Modal Management -------------------------- */
+
 function openModal(id: string) {
 	$(id).style.display = "flex";
 }
 
-/**
- * Closes a specified modal.
- * @param {string} id - The ID of the modal to close ('save-modal' or 'instruction-modal').
- */
 function closeModal(id: string) {
 	$(id).style.display = "none";
 }
 
-/**
- * Opens the instruction modal.
- */
+/** Shortcut for opening the instruction modal. */
 function openInstructionModal() {
 	openModal("instruction-modal");
 }
 
-/**
- * Collects all persona data, logs it, and shows the confirmation modal.
- */
+/* ----------------------------- Persona Logic ----------------------------- */
+
+/** Collect all persona data and show confirmation modal. */
 function savePersona() {
 	const personaData = {
 		name: ($("name") as HTMLInputElement).value,
@@ -121,29 +125,31 @@ function savePersona() {
 		address: ($("address") as HTMLInputElement).value,
 		phone: ($("phone") as HTMLInputElement).value,
 		bio: ($("bio") as HTMLInputElement).value,
-		customFields: customFields,
+		customFields,
 	};
 
 	console.log("--- Persona Saved (Placeholder) ---");
-	// console.log(JSON.stringify(personaData, null, 2)); // Keeping log brief for UI testing
+	console.log(personaData);
+	const serializedPersonaData = JSON.stringify(personaData);
 
-	// Show confirmation modal
-	openModal("save-modal");
+	savePersonaData(serializedPersonaData);
+
+	// chrome.storage.local.set()
+	const toast = $("save-modal");
+	toast.classList.add("visible");
+	setTimeout(() => {
+		toast.classList.remove("visible");
+	}, 3000);
 }
 
-/**
- * Placeholder for loading profile data.
- */
+/** Placeholder for loading stored profile data. */
 function loadProfile() {
 	console.log("Loading profile data...");
-	// In a real application, you'd fetch data and update the inputs and customFields array.
 }
 
-/**
- * Clears all fields and resets the bio textarea to the prompt text.
- */
+/** Reset all fields and restore initial defaults. */
 function clearAll() {
-	($("name") as HTMLInputElement).value = "Jane K. Doe"; // Keeping some defaults for quick testing
+	($("name") as HTMLInputElement).value = "Jane K. Doe";
 	($("email") as HTMLInputElement).value = "jane.doe@aperture.com";
 	($("dob") as HTMLInputElement).value = "1987-03-24";
 	($("gender") as HTMLInputElement).value = "female";
@@ -151,51 +157,56 @@ function clearAll() {
 	($("company") as HTMLInputElement).value = "Aperture Science, LLC";
 	($("address") as HTMLInputElement).value = "123 Science Way, MI 49999";
 	($("phone") as HTMLInputElement).value = "+1 (555) 555-1234";
-
 	($("bio") as HTMLInputElement).value = defaultBioText;
 
 	newLabelInput.value = "";
 	newValueInput.value = "";
 	newTypeSelect.value = "text";
 
-	// Reset custom fields to initial state
 	customFields = [
 		{ label: "Project ID", value: "GLaDOS-1975", type: "text" },
 		{ label: "Preferred Initials", value: "JKD", type: "text" },
 		{ label: "Start Date", value: "2019-01-01", type: "date" },
 		{ label: "Employee ID", value: "87532", type: "number" },
 	];
+
 	renderCustomFields();
 	console.log("All fields reset to initial state.");
 }
 
-// Attach event listener for the Add button
+/* ----------------------------- Event Bindings ---------------------------- */
+
+// Field management
 addFieldButton.addEventListener("click", addCustomField);
+customFieldsContainer.addEventListener("click", (e) => {
+	const deleteBtn = (e.target as HTMLElement).closest(".delete-btn");
+	const index = (deleteBtn as HTMLElement)?.dataset.index;
+	if (index) deleteCustomField(+index);
+});
 
-// Initialize Lucide icons and ensure initial bio text is set correctly on load
+// Modal interactions
+openInstructionsBtn.addEventListener("click", () =>
+	openModal("instruction-modal")
+);
+
+instructionModal.addEventListener("click", (e) => {
+	const t = e.target as HTMLElement;
+	const closeTargets = [
+		t.closest("#instructionModalCloseBtn"),
+		t.closest("#close-instructions"),
+	];
+	if (t === instructionModal || closeTargets.some(Boolean))
+		closeModal("instruction-modal");
+});
+
+savePersonaBtn.addEventListener("click", savePersona);
+// On load setup
 window.addEventListener("load", () => {
-	// Initialize bio content to the guidance/prompt text
 	($("bio") as HTMLInputElement).value = defaultBioText;
+	renderCustomFields();
 });
 
-const openInstructionsBtn = $("openInstructionsBtn");
-
-openInstructionsBtn.addEventListener("click", function () {
-	openModal("instruction-modal");
-});
-
-instructionModal.addEventListener("click", function (e) {
-	const closeBtn = (e.target as HTMLElement).closest(
-		"#instructionModalCloseBtn"
-	);
-	const modal = (e.target as HTMLElement) === instructionModal;
-	const closeInstruction = (e.target as HTMLElement).closest(
-		"#close-instructions"
-	);
-
-	closeBtn || modal || closeInstruction
-		? closeModal("instruction-modal")
-		: null;
-});
-
-renderCustomFields();
+const savePersonaData = async function (data: string) {
+	await chrome.storage.local.set({ personaData: data });
+	console.log("Saved Persona Data");
+};

@@ -276,3 +276,7 @@ td {
 	color: var(--muted);
 	border-radius: 8px;
 }
+
+.initially-hidden {
+    display: none;
+}

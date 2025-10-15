@@ -189,7 +189,7 @@
 						<!-- Data Type Selector -->
 						<div class="form-group" style="margin-bottom: 0; flex-grow: 0.5">
 							<label for="new-custom-type">Data Type</label>
-							<select id="new-custom-type">
+							<select id="new-custom-type" class="select-custom">
 								<option value="text">Text</option>
 								<option value="number">Number</option>
 								<option value="date">Date</option>
@@ -229,7 +229,7 @@
 				<button class="btn secondary" type="button" onclick="loadProfile()">
 					Load Profile
 				</button>
-				<button class="btn primary" type="button" onclick="savePersona()">
+				<button class="btn primary" type="button" id="save-persona">
 					Save Persona
 				</button>
 			</div>
@@ -240,35 +240,9 @@
 			</footer>
 		</div>
 
-		<!-- Modal Dialog for Save Confirmation / Instructions (Uses same style) -->
-		<div id="save-modal" class="modal-backdrop">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">Persona Saved (Placeholder)</h3>
-					<button class="modal-close-btn" onclick="closeModal('save-modal')">
-						&times;
-					</button>
-				</div>
-				<div class="modal-body">
-					<p style="color: var(--accent); font-weight: 600">
-						For the best results, follow the instructions!
-					</p>
-					<p>
-						Ensure you have copied the **AI Interview Prompt** from the
-						instruction modal into an LLM and pasted your detailed answers back
-						in.
-					</p>
-					<p>
-						This comprehensive Q&A format will maximize your profile's
-						effectiveness for filling out complex, vague, or subjective form
-						fields.
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button class="btn primary" onclick="closeModal('save-modal')">
-						Got it!
-					</button>
-				</div>
+		<div id="save-modal" class="save-toast hidden">
+			<div class="toast-content">
+				<p>✅ Persona saved successfully!</p>
 			</div>
 		</div>
 
