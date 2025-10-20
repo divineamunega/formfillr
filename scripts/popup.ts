@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		getAiSuggestionsButton.addEventListener("click", () => {
 			getAiSuggestionsButton.textContent = "Loading...";
 			getAiSuggestionsButton.setAttribute("disabled", "true");
+			console.log(fields);
 			chrome.runtime.sendMessage({ type: "GET_AI_SUGGESTIONS", fields });
 		});
 	}
