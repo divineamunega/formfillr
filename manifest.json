@@ -2,69 +2,51 @@
 	"manifest_version": 3,
 	"name": "FormFillr",
 	"version": "1.0.0",
-	"description": "AI-powered form filling extension that uses your personal profile to intelligently fill out web forms. Currently optimized for Google Forms.",
+	"description": "AI-powered form filler for Google Forms.",
 	"author": "Divine Amunega",
 	"homepage_url": "https://github.com/divineamunega/formfillr",
-
-	"permissions": ["activeTab", "storage", "tabs"],
-
+	"permissions": ["activeTab", "storage"],
 	"host_permissions": ["https://openrouter.ai/*"],
-
 	"action": {
 		"default_popup": "ui/popup.html",
-		"default_title": "FormFillr - AI Form Filler",
 		"default_icon": {
 			"16": "icons/icon16.png",
 			"48": "icons/icon48.png",
 			"128": "icons/icon128.png"
 		}
 	},
-
 	"background": {
-		"service_worker": "scripts/background/index.ts",
+		"service_worker": "scripts/background/index.js",
 		"type": "module"
 	},
-
 	"content_scripts": [
 		{
-			"matches": [
-				"https://docs.google.com/forms/*",
-				"https://forms.gle/*",
-				"http://*/*",
-				"https://*/*"
-			],
-			"js": ["scripts/content/index.ts"],
+			"matches": ["https://docs.google.com/forms/*", "https://forms.gle/*"],
+			"js": ["scripts/content/index.js"],
 			"run_at": "document_end"
 		}
 	],
-
 	"icons": {
 		"16": "icons/icon16.png",
 		"48": "icons/icon48.png",
 		"128": "icons/icon128.png"
 	},
-
 	"options_ui": {
 		"page": "ui/options.html",
 		"open_in_tab": true
 	},
-
 	"web_accessible_resources": [
 		{
-			"resources": ["ui/*", "icons/*"],
+			"resources": ["icons/*"],
 			"matches": ["<all_urls>"]
 		}
 	],
-
-	"minimum_chrome_version": "88",
-
 	"commands": {
 		"_execute_action": {
 			"suggested_key": {
 				"default": "Ctrl+Shift+F",
 				"mac": "Command+Shift+F"
-			},
-			"description": "Open FormFillr popup"
+			}
 		}
 	}
 }
