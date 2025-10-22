@@ -48,7 +48,7 @@
 			<div class="summary" role="status" aria-live="polite">
 				<div id="field-count" class="pill">3 fields detected</div>
 				<div class="actions">
-					<a id="scan-button" class="btn secondary" href="#" role="button" aria-disabled="true">
+					<a id="scan-button" class="btn secondary" href="#" role="button">
 						<!-- refresh icon -->
 						<svg
 							width="14"
@@ -74,7 +74,9 @@
 						</svg>
 						Scan
 					</a>
-					<a id="get-ai-suggestions-button" class="btn" href="#" role="button">Get AI Suggestions</a>
+					<a id="get-ai-suggestions-button" class="btn" href="#" role="button"
+						>Get AI Suggestions</a
+					>
 				</div>
 			</div>
 
@@ -83,13 +85,22 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 38%">Field</th>
-							            <th class="initially-hidden" style="width: 34%">Suggested value</th>
-							            <th class="initially-hidden" style="width: 14%">Confidence</th>
-							            <th class="initially-hidden" style="width: 14%; text-align: right">Actions</th>						</tr>
+							<th style="width: 30%">Field</th>
+							<th class="initially-hidden" style="width: 40%">
+								Suggested value
+							</th>
+							<th class="initially-hidden" style="width: 18%">Confidence</th>
+							<th
+								class="initially-hidden"
+								style="width: 12%; text-align: right"
+							>
+								Actions
+							</th>
+						</tr>
 					</thead>
 					<tbody>
-						<!-- Fields will be dynamically inserted here --></tbody>
+						<!-- Fields will be dynamically inserted here -->
+					</tbody>
 				</table>
 			</div>
 
@@ -97,13 +108,21 @@
 				<div class="hint">
 					Detected on: <strong>docs.google.com/forms/</strong>
 				</div>
-				<div style="display: flex; gap: 8px">
+				<div style="display: flex; gap: 8px; align-items: center">
+					<button
+						id="fill-selected-btn"
+						class="btn primary"
+						type="button"
+						disabled
+					>
+						Fill Selected (0)
+					</button>
 					<button class="small-btn" type="button">Clear selection</button>
 					<button class="small-btn" type="button">Wipe persona</button>
 				</div>
 			</div>
 		</div>
 
-		<script src="./popup.js"></script>
+		<script type="module" src="../scripts/popup/index.ts"></script>
 	</body>
 </html>

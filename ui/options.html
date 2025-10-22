@@ -58,12 +58,7 @@
 						<!-- Full Name -->
 						<div class="form-group">
 							<label for="name">Full Name</label>
-							<input
-								type="text"
-								id="name"
-								value="Jane K. Doe"
-								placeholder="e.g. John Doe"
-							/>
+							<input type="text" id="name" placeholder="e.g. John Doe" />
 						</div>
 
 						<!-- Email -->
@@ -72,7 +67,6 @@
 							<input
 								type="email"
 								id="email"
-								value="jane.doe@aperture.com"
 								placeholder="e.g. samuel@example.com"
 							/>
 						</div>
@@ -80,16 +74,18 @@
 						<!-- Date of Birth -->
 						<div class="form-group">
 							<label for="dob">Date of Birth</label>
-							<input type="date" id="dob" value="1987-03-24" />
+							<input type="date" id="dob" />
 						</div>
 
 						<!-- Gender -->
 						<div class="form-group">
 							<label for="gender">Gender</label>
 							<select id="gender">
-								<option value="prefer_not_say">Prefer not to say</option>
+								<option value="prefer_not_say" selected>
+									Prefer not to say
+								</option>
 								<option value="male">Male</option>
-								<option value="female" selected>Female</option>
+								<option value="female">Female</option>
 								<option value="nonbinary">Non-binary</option>
 							</select>
 						</div>
@@ -100,7 +96,6 @@
 							<input
 								type="text"
 								id="role"
-								value="Lead Portal Tester"
 								placeholder="e.g. Software Engineer"
 							/>
 						</div>
@@ -108,12 +103,7 @@
 						<!-- Company / Organization -->
 						<div class="form-group">
 							<label for="company">Company / Organization</label>
-							<input
-								type="text"
-								id="company"
-								value="Aperture Science, LLC"
-								placeholder="e.g. Idealabs"
-							/>
+							<input type="text" id="company" placeholder="e.g. Idealabs" />
 						</div>
 
 						<!-- Mailing Address -->
@@ -122,7 +112,6 @@
 							<input
 								type="text"
 								id="address"
-								value="123 Science Way, MI 49999"
 								placeholder="Street, City, State, Zip"
 							/>
 						</div>
@@ -133,7 +122,6 @@
 							<input
 								type="tel"
 								id="phone"
-								value="+1 (555) 555-1234"
 								placeholder="e.g. +1 (555) 123-4567"
 							/>
 						</div>
@@ -143,27 +131,112 @@
 				<!-- 2. Personal Context & Bio -->
 				<section class="card">
 					<h2 class="section-title">Personal Context & Bio</h2>
-					<!-- UPDATED LABEL WITH BUTTON -->
-					<div class="form-group">
-						<label for="bio" class="flex items-center justify-between">
-							<span
-								>Short Bio / Context (For vague fields like "Tell us
-								more...")</span
-							>
-							<button
-								id="openInstructionsBtn"
-								class="btn secondary"
-								type="button"
-								style="padding: 4px 8px; font-size: 11px; margin-right: 0"
-							>
-								How do I fill this?
+					<div class="bio-section">
+						<div class="bio-options">
+							<button id="ai-interview-btn" class="btn primary" type="button">
+								🤖 Generate Bio with AI Interview
 							</button>
-						</label>
-						<textarea
-							id="bio"
-							rows="10"
-							placeholder="Paste your detailed personal Q&A transcript here."
-						></textarea>
+							<button id="manual-bio-btn" class="btn secondary" type="button">
+								✏️ Write Manually
+							</button>
+						</div>
+
+						<!-- AI Interview Interface (initially hidden) -->
+						<div id="ai-interview-container" class="ai-interview hidden">
+							<div class="interview-header">
+								<h3>AI Interview - Let's build your bio together!</h3>
+								<p>
+									I'll ask you some questions to create a comprehensive bio.
+								</p>
+							</div>
+							<div id="interview-chat" class="interview-chat">
+								<!-- Chat messages will be added here -->
+							</div>
+							<div class="interview-input">
+								<input
+									type="text"
+									id="interview-answer"
+									placeholder="Type your answer here..."
+								/>
+								<button id="send-answer-btn" class="btn primary">Send</button>
+							</div>
+							<div class="interview-progress">
+								<div class="progress-bar">
+									<div id="progress-fill" class="progress-fill"></div>
+								</div>
+								<span id="progress-text">Question 1 of 8</span>
+							</div>
+						</div>
+
+						<!-- Manual Bio Input (initially hidden) -->
+						<div id="manual-bio-container" class="manual-bio hidden">
+							<div class="form-group">
+								<label for="bio">
+									Short Bio / Context (For vague fields like "Tell us more...")
+								</label>
+								<textarea
+									id="bio"
+									rows="10"
+									placeholder="Write about your professional background, interests, achievements, and what makes you unique..."
+								></textarea>
+							</div>
+						</div>
+
+						<!-- Generated Bio Preview -->
+						<div id="bio-preview-container" class="bio-preview hidden">
+							<h4>Generated Bio Preview:</h4>
+							<div id="bio-preview" class="bio-preview-text"></div>
+							<div class="bio-actions">
+								<button id="edit-bio-btn" class="btn secondary">Edit</button>
+								<button id="regenerate-bio-btn" class="btn secondary">
+									Regenerate
+								</button>
+								<button id="accept-bio-btn" class="btn primary">
+									Accept & Save
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Debug Section -->
+				<section
+					id="debug-section"
+					class="card"
+					style="
+						border: 2px dashed #fbbf24;
+						background: rgba(251, 191, 36, 0.05);
+						display: none;
+					"
+				>
+					<h2 class="section-title">🔧 Debug Tools</h2>
+					<p class="subtitle" style="margin-bottom: 12px; color: #f59e0b">
+						Use these tools to test the bio generation and see detailed error
+						logs.
+					</p>
+					<div class="flex items-center gap-2" style="margin-bottom: 18px">
+						<button id="test-bio-btn" class="btn secondary" type="button">
+							🧪 Test Bio Generation
+						</button>
+						<button id="clear-logs-btn" class="btn secondary" type="button">
+							🗑️ Clear Console Logs
+						</button>
+					</div>
+					<div
+						id="debug-output"
+						style="
+							background: #1f2937;
+							color: #e5e7eb;
+							padding: 12px;
+							border-radius: 6px;
+							font-family: monospace;
+							font-size: 12px;
+							max-height: 200px;
+							overflow-y: auto;
+							display: none;
+						"
+					>
+						Debug output will appear here...
 					</div>
 				</section>
 
@@ -223,10 +296,15 @@
 
 			<!-- Action Bar -->
 			<div class="actions">
-				<button class="btn secondary" type="button" onclick="clearAll()">
+				<button class="btn secondary" type="button" id="clear-all-btn">
 					Clear All
 				</button>
-				<button class="btn secondary" type="button" onclick="loadProfile()">
+				<button
+					class="btn secondary"
+					type="button"
+					id="load-profile-btn"
+					onclick="loadProfile()"
+				>
 					Load Profile
 				</button>
 				<button class="btn primary" type="button" id="save-persona">
@@ -246,76 +324,6 @@
 			</div>
 		</div>
 
-		<!-- Instruction Modal (New) -->
-		<div id="instruction-modal" class="modal-backdrop">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">How to Create a Detailed Personal Bio</h3>
-					<button class="modal-close-btn" id="instructionModalCloseBtn">
-						&times;
-					</button>
-				</div>
-				<div class="modal-body">
-					<p><strong>Guidance: What to Write Here</strong></p>
-					<p>
-						This space is for creating a rich, versatile narrative about
-						yourself that goes beyond simple facts. A detailed entry helps
-						FormFillr generate complex, subjective answers for forms asking
-						questions like "Describe your goals," or "Tell us about a time you
-						demonstrated leadership.
-					</p>
-
-					<p>Your Bio should include:</p>
-					<ul>
-						<li>
-							<strong>Professional Summary:</strong> A few sentences describing
-							your current role, key skills, and major responsibilities.
-						</li>
-						<li>
-							<strong>Personal Interests:</strong> Hobbies, non-work passions,
-							and areas of intellectual curiosity (e.g., "I enjoy hiking,
-							learning about local history, and building small electronics
-							projects").
-						</li>
-						<li>
-							<strong>Values/Philosophy:</strong> Anything about your work
-							ethic, approach to challenges, or personal philosophy.
-						</li>
-					</ul>
-
-					<!-- <p>---</p> -->
-
-					<p style="color: var(--accent); font-weight: 600">
-						FOR BEST RESULTS, FOLLOW THE DETAILED AI INTERVIEW INSTRUCTIONS
-						BELOW:
-					</p>
-
-					<p>
-						<strong>INSTRUCTIONS:</strong> Copy the
-						<strong>PROMPT TO USE WITH AI</strong>
-						below and paste it into a large language model (like Gemini,
-						ChatGPT, or Claude). Respond to the AI's 10 questions, then copy the
-						entire Q&A transcript and paste it back into the bio text area.
-					</p>
-
-					<p><strong>PROMPT TO USE WITH AI:</strong></p>
-					<code
-						>Act as a professional interviewer for a job application or
-						university admission. Ask me 10 specific, open-ended questions
-						designed to uncover my professional experience, personal interests,
-						biggest achievements, and how I handle challenges. I will provide a
-						short answer after each question. Structure your response as 'Q:
-						[Question]\nA: [Your Answer]'. Once complete, copy the entire Q&A
-						transcript back into this textarea and save.</code
-					>
-				</div>
-				<div class="modal-footer">
-					<button class="btn primary" id="close-instructions">
-						Close Instructions
-					</button>
-				</div>
-			</div>
-		</div>
-		<script type="module" src="./options.js"></script>
+		<script type="module" src="../scripts/options/index.ts"></script>
 	</body>
 </html>

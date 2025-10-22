@@ -5,7 +5,7 @@
 	"description": "A modern Chrome extension boilerplate using TypeScript",
 	"permissions": ["activeTab", "storage"],
 	"action": {
-		"default_popup": "popup.html",
+		"default_popup": "ui/popup.html",
 		"default_icon": {
 			"16": "icons/icon16.png",
 			"48": "icons/icon48.png",
@@ -13,12 +13,13 @@
 		}
 	},
 	"background": {
-		"service_worker": "background.js"
+		"service_worker": "scripts/background/index.ts",
+		"type": "module"
 	},
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["content.js"]
+			"js": ["scripts/content/index.ts"]
 		}
 	],
 	"icons": {
@@ -27,7 +28,7 @@
 		"128": "icons/icon128.png"
 	},
 	"options_ui": {
-		"page": "./options.html",
+		"page": "ui/options.html",
 		"open_in_tab": true
 	}
 }

@@ -31,7 +31,7 @@ body {
 }
 
 .container {
-	width: 420px;
+	width: 580px;
 	max-width: calc(100vw - 24px);
 	margin: 14px auto;
 	border-radius: var(--radius);
@@ -129,16 +129,45 @@ body {
 	box-shadow: none;
 }
 
+.btn:disabled,
+.btn.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
 /* Table */
 .table-wrap {
 	background: linear-gradient(180deg, var(--glass), var(--glass-2));
 	border-radius: 10px;
 	padding: 8px;
 	border: 1px solid rgba(255, 255, 255, 0.03);
+	overflow-x: auto;
+	max-width: 100%;
+}
+
+/* Custom scrollbar for table */
+.table-wrap::-webkit-scrollbar {
+	height: 6px;
+}
+
+.table-wrap::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.02);
+	border-radius: 3px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb {
+	background: rgba(124, 92, 255, 0.3);
+	border-radius: 3px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb:hover {
+	background: rgba(124, 92, 255, 0.5);
 }
 
 table {
 	width: 100%;
+	min-width: 520px;
 	border-collapse: collapse;
 	font-size: 13px;
 }
@@ -186,13 +215,14 @@ td {
 	background: rgba(255, 255, 255, 0.02);
 	border-radius: 8px;
 	border: 1px solid rgba(255, 255, 255, 0.03);
-	max-width: 170px;
+	max-width: 200px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono",
 		monospace;
 	font-size: 12px;
+	word-break: break-all;
 }
 
 .confidence {
@@ -226,14 +256,51 @@ td {
 }
 
 .checkbox {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	width: 18px;
 	height: 18px;
 	border-radius: 5px;
 	border: 1px solid rgba(255, 255, 255, 0.06);
-	display: inline-grid;
-	place-items: center;
 	background: transparent;
+	position: relative;
+	cursor: pointer;
 }
+
+.checkbox input[type="checkbox"] {
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+	margin: 0;
+}
+
+.checkbox input[type="checkbox"]:checked + .checkmark,
+.checkbox input[type="checkbox"]:checked::after {
+	opacity: 1;
+}
+
+/* Custom checkmark */
+.checkbox::after {
+	content: "✓";
+	position: absolute;
+	color: var(--accent);
+	font-size: 12px;
+	font-weight: bold;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.checkbox:has(input:checked)::after {
+	opacity: 1;
+}
+
+/* Fallback for browsers that don't support :has() */
+.checkbox.checked::after {
+	opacity: 1;
+}
+
 .checkbox svg {
 	opacity: 0.9;
 }
@@ -245,6 +312,7 @@ td {
 	align-items: center;
 	gap: 10px;
 	margin-top: 12px;
+	flex-wrap: wrap;
 }
 .hint {
 	color: var(--muted);
@@ -260,12 +328,15 @@ td {
 }
 
 /* responsive tweak */
-@media (max-width: 460px) {
+@media (max-width: 620px) {
 	.container {
 		width: calc(100vw - 20px);
 	}
 	.confidence {
 		display: none;
+	}
+	table {
+		min-width: 420px;
 	}
 }
 
@@ -278,5 +349,5 @@ td {
 }
 
 .initially-hidden {
-    display: none;
+	display: none;
 }

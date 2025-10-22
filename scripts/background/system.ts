@@ -1,37 +1,4 @@
-chrome.runtime.onInstalled.addListener(() => {
-	chrome.runtime.openOptionsPage();
-});
-
-chrome.runtime.onMessage.addListener(async (msg, sender) => {
-	if (msg.type === "POPUP_OPENED") {
-	}
-
-	if (msg.type === "GET_AI_SUGGESTIONS") {
-		const { personaData } = await chrome.storage.local.get("personaData");
-		const formData = JSON.stringify(msg.fields);
-
-		const data = { personaData, formData };
-
-		const stringifiedData = JSON.stringify(data);
-
-		fetch("https://openrouter.ai/api/v1/chat/completions", {
-			method: "POST",
-			headers: {
-				Authorization:
-					"Bearer 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",
-				"HTTP-Referer": "autofill_ai", // Optional. Site URL for rankings on openrouter.ai.
-				"X-Title": "autofill_ai", // Optional. Site title for rankings on openrouter.ai.
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				// The AI model to be used
-				model: "meta-llama/llama-4-maverick:free",
-				// The messages to be sent to the AI model
-				messages: [
-					{
-						role: "system",
-						// The system prompt to be used in the AI model
-						content: `You are an AI assistant embedded in a Chrome extension that helps users autofill forms on web pages using their stored persona information.
+export const systemPrompt = `You are an AI assistant embedded in a Chrome extension that helps users autofill forms on web pages using their stored persona information.
 
 Your job is to map each input field in a web form to the most relevant value from the user’s saved persona data.
 
@@ -125,17 +92,4 @@ Return only:
   ...
 ]
   
-`,
-					},
-					{
-						role: "user",
-						// The user prompt to be used in the AI model
-						content: stringifiedData,
-					},
-				],
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => console.log(data.choices[0].message.content));
-	}
-});
+`;
